@@ -1,7 +1,7 @@
 @font-face {font-family: Pusab; src: url(/gdeditor/assets/fonts/Pusab.ttf)}
 
 html {
-  background-image: linear-gradient(#43075f, #1e022b);
+  background-image: linear-gradient(#4a0063, #22002d);
   height: 100%;
   --kmOrange: #ec9b37;
 }
