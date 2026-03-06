@@ -6,7 +6,7 @@ async function readResponses() {
   y.forEach((element) => console.log(element));
 }
 
-window.onload = await readResponses();
+window.onload = readResponses();
 
 function achievement(name, cubeID) {
   sfx.play();
