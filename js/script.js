@@ -51,7 +51,7 @@ window.onload = readResponses();
 
 // get ready for probably the biggest function in this script file
 function nextMessage(userInput) {
-  document.getElementById('keymasterResponse').innerHTML = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+  document.getElementById('keymasterResponse').innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
   document.getElementById('keymasterResponse').style.color = response[kmResponseNum].color;
   document.getElementById('userInput').value = '';
   kmResponseNum++;
