@@ -4,8 +4,12 @@ let sfx = new Audio('sounds/achievement.mp3');
 
 let response;
 let kmResponseNum;
+
 let response2;
 let kmMessageNum;
+
+let response3;
+let kmBasementNum;
 
 // when you enter this page for the first time
 if (localStorage.vosSettings == undefined) {
@@ -85,6 +89,30 @@ async function readResponses() {
     document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
     
   }
+
+  url = 'data/keymasterBasement.json';
+  
+  options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  
+  try {
+
+    let data3 = await fetch(url, options);
+    response3 = await data3.json();
+    
+    kmBasementNum = Math.floor(Math.random() * response3.length);
+    /* debug script: response.forEach((element) => console.log(element)); */
+    
+  } catch (err) {
+    
+    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    
+  }
+
 }
 
 // fetches keymaster responses when page loads
@@ -115,6 +143,17 @@ function nextMessage(userInput) {
       kmMessageNum++;
     }
   }
+}
+
+function basementMessage() {
+
+  alert(response3[kmBasementNum].replace('<username>', JSON.parse(localStorage.vosSettings).userName));
+  if (kmBasementNum == response3.length - 1) {
+    kmBasementNum = 0;
+  } else {
+    kmBasementNum++;
+  }
+
 }
 
 function achievement(name, cubeID) {
