@@ -98,8 +98,8 @@ function nextMessage(userInput) {
 
   } else {
 
-    document.getElementById('keymasterResponse').innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
-    document.getElementById('keymasterResponse').style.color = response[kmResponseNum].color;
+    document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    document.getElementById('keymasterResponse').style.color = response2[kmMessageNum].color;
     document.getElementById('userInput').value = '';
     if (kmMessageNum == response2.length - 1) {
       kmMessageNum = 0;
