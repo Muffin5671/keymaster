@@ -48,7 +48,8 @@ input {
 }
 
 img#loading {
-  animation: loadingSpin 2.5s infinite linear;
+  inline-size: 80px;
+  animation: loadingSpin 1s infinite linear;
 }
 
 div.brownbox {
