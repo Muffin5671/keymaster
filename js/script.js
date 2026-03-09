@@ -67,7 +67,9 @@ async function readResponses() {
     
     kmMessageNum = 0;
 
-    document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);;
+    document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+
+    kmMessageNum++;
     
     response2.forEach((element) => console.log(element));
     return response2;
