@@ -139,7 +139,7 @@ function optMenu() {
   element.id = 'optMenu';
   element.className = 'brownbox';
   let opt1 = document.createElement('input');
-  opt1.id = ''
+  opt1.id = 'volumeSlider'
   opt1.type = 'range';
   opt1.oninput = "music.volume = document.getElementById('volumeSlider').value / 100"; // doesn't work ??
   element.append(opt1);
