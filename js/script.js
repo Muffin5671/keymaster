@@ -65,7 +65,13 @@ async function readResponses() {
     let data2 = await fetch(url, options);
     response2 = await data2.json();
     
-    kmMessageNum = 0;
+    // can start on array index 0 or array index 9
+
+    if (Math.round(Math.random()) == 1) {
+      kmMessageNum = 9;
+    } else {
+      kmMessageNum = 0;
+    }
 
     document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
 
@@ -84,7 +90,7 @@ async function readResponses() {
 // fetches keymaster responses when page loads
 window.onload = readResponses();
 
-// get ready for probably the biggest function in this script file
+// keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
 
   if (!(userInput == '')) {
