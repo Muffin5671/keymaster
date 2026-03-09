@@ -36,13 +36,23 @@ async function readResponses() {
   }
   
   try {
+
     let data = await fetch(url, options);
     response = await data.json();
+
+    document.getElementById('loading').id = 'keymaster';
+    document.getElementById('keymaster').src = 'images/keymaster.png';
+    document.getElementById('keymaster').style.transform = 'scale(0.5)';
+    
     kmResponseNum = Math.floor(Math.random() * response.length);
     response.forEach((element) => console.log(element));
     return response;
+    
   } catch (err) {
+    
     document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    document.getElementById('loading').remove();
+    
   }
 }
 
