@@ -24,6 +24,7 @@ p {
   color: #ffffff;
   -webkit-text-stroke: 1.6px;
   -webkit-text-stroke-color: #000000;
+  line-height: 1;
   text-shadow: 2.4px 2.4px 1.5px #00000050;
 }
 

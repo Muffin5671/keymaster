@@ -32,11 +32,10 @@ function audioCheck() {
 // all keymaster messages are in an external JSON
 async function readResponses() {
   
-  url = 'data/keymasterResponses.json';
-  
+
   try {
 
-    response = await fetch(url).then(res => res.json());
+    response = await fetch('data/keymasterResponses.json').then(res => res.json());
     
     // responses start on a random number
     kmResponseNum = Math.floor(Math.random() * response.length);
@@ -47,11 +46,10 @@ async function readResponses() {
     
   }
 
-  url = 'data/keymasterMessages.json';
-  
+
   try {
 
-    response2 = await fetch(url).then(res => res.json());
+    response2 = await fetch('data/keymasterMessages.json').then(res => res.json());
     
     // can start on array index 0 or array index 9
 
@@ -71,11 +69,10 @@ async function readResponses() {
     
   }
 
-  url = 'data/keymasterBasement.json';
-  
+
   try {
 
-    response3 = await fetch(url).then(res => res.json());
+    response3 = await fetch('data/keymasterBasement.json').then(res => res.json());
     
     kmBasementNum = Math.floor(Math.random() * response3.length);
     /* debug script: response3.forEach((element) => console.log(element)); */
