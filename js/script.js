@@ -1,6 +1,6 @@
 // setup script
 
-import jquery400Min from "./libraries/jquery-4.0.0.min";
+import jquery400Min from "./libraries/jquery-4.0.0.min.js";
 
 let music = new Audio('sounds/secretLoop.mp3');
 let sfx = new Audio('sounds/achievement.mp3');
@@ -24,6 +24,10 @@ function mobileTest() {
   }
 }
 
+function mobileTap() {
+  document.body.addEventListener("click", mobileTest);
+}
+
 // when you enter this page for the first time
 if (localStorage.vosSettings == undefined) {
   localStorage.vosSettings = generateSettingsFile({defaultUsername: true});
@@ -31,7 +35,7 @@ if (localStorage.vosSettings == undefined) {
 
 // plays audio on page click
 function playAudio() {
-  document.body.addEventListener("click", audioCheck)
+  document.body.addEventListener("click", audioCheck);
 }
 
 // checks if audio option is on/off
