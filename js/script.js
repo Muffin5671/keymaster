@@ -71,8 +71,8 @@ async function readResponses() {
 
   try {
 
-    if (localStorage.vosCached == undefined) {
-      response = ungzip(atob(localStorage.vosCached).response);
+    if (!localStorage.vosCached == undefined) {
+      response = JSON.parse(atob(ungzip(localStorage.vosCached))).response;
     } else {
       response = await fetch('data/keymasterResponses.json').then(res => res.json());
     }
