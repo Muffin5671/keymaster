@@ -72,7 +72,7 @@ async function readResponses() {
   try {
 
     if (!localStorage.vosCached == undefined) {
-      response = JSON.parse(atob(ungzip(localStorage.vosCached))).response;
+      response = JSON.parse(atob(ungzip(localStorage.vosCached))).messages;
     } else {
       response = await fetch('data/keymasterResponses.json').then(res => res.json());
     }
@@ -124,7 +124,7 @@ async function readResponses() {
   }
 
   if (localStorage.vosCached == undefined) {
-    localStorage.vosCached = gzip(btoa(JSON.stringify({response: response, response2: response2, response3: response3})));
+    localStorage.vosCached = gzip(btoa(JSON.stringify({messages: response2, responses: response, basement: response3})));
   }
 
 }
