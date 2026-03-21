@@ -10,7 +10,7 @@
     <script src="js/script.js" defer></script>
     <script src="js/libraries/pako.min.js"></script>
   </head>
-  <body onload="playAudio(); mobileTest()">
+  <body onload="playAudio()">
     
     <img src="images/logo.png" style="transform: scale(0.5); margin-top: 5px; -webkit-user-drag: none;" alt="Vault of Secrets" title="Logo">
     
@@ -77,8 +77,9 @@
       " alt="Basement Door" title="Basement" onclick="basementMessage()">
     
     <div id="menus">
-      <div class="brownbox" id="optMenu" style="display: none;">
-        <input id="userNameInput" maxlength="15">
+      <div class="brownbox" id="optMenu" style="display: none; position: absolute; height: 80%; top: 5%;">
+        <button onclick="document.getElementById('optMenu').style.display = 'none'">Back</button>
+        <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15">
         <input type="checkbox" id="audioCheck">
         <button onclick="saveChanges()">Save</button>
       </div>
