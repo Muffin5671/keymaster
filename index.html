@@ -19,7 +19,7 @@
     </noscript>
     
     <a href="../">
-      <img src="../gdeditor/assets/GJ_arrow_01_001.png" style="
+      <img src="images/backBtn.png" style="
         position: absolute;
         left: -18px;
         top: -30px;
@@ -83,9 +83,17 @@
         top: 50%;
         width: 50%;
         height: 80%;
+        display: none;
         transform: translate(-50%, -50%);
         ">
-        <button onclick="document.getElementById('optMenu').style.display = 'none';">Back</button>
+        <img src="images/closeBtn.png" style="
+          position: absolute;
+          left: -150px;
+          top: -150px;
+          transform: scale(0.46);
+          -webkit-user-drag: none;
+          " alt="Close Button" title="Close Menu" onclick="document.getElementById('optMenu').style.display = 'none';">
+
         <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15">
         <input type="checkbox" id="audioCheck">
         <button onclick="saveChanges()">Save</button>
