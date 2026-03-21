@@ -85,6 +85,7 @@ async function readResponses() {
   } catch (err) {
     
     document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    throw new Error(err);
     
   }
 
@@ -112,7 +113,8 @@ async function readResponses() {
   } catch (err) {
     
     document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
-    
+    throw new Error(err);
+
   }
 
 
@@ -130,7 +132,8 @@ async function readResponses() {
   } catch (err) {
     
     document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
-    
+    throw new Error(err);
+
   }
 
   if (localStorage.vosCached == undefined) {
