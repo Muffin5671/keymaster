@@ -19,6 +19,7 @@ let kmMessageNum;
 let response3;
 let kmBasementNum;
 
+// mobile popup
 let isMobile;
 function mobileTest() {
   isMobile = /iPhone|Android/.test(navigator.userAgent);
@@ -62,7 +63,7 @@ function ungzip(string) {
 }
 
 let cached = {};
-if (!localStorage.vosCached == undefined) {
+if (!(localStorage.vosCached == undefined)) {
   cached = JSON.parse(atob(ungzip(JSON.parse(localStorage.vosCached).data)));
 }
 
