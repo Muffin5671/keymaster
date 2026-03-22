@@ -28,6 +28,9 @@ function mobileTest() {
   if (isMobile) {
     alert('Note: It is recommended to use a larger screen like a desktop and not a small screen like a phone. You can manually change the page size to a proper one.');
     onclick = null;
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -146,7 +149,7 @@ async function readResponses() {
 }
 
 // fetches keymaster responses when page loads
-window.onload = readResponses();
+onload = readResponses;
 
 // keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
