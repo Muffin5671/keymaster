@@ -157,7 +157,7 @@ onload = readResponses;
 // keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
 
-  if (!(userInput == '')) {
+  if (userInput == '') {
 
     document.getElementById('keymasterResponse').innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
     document.getElementById('keymasterResponse').style.color = response[kmResponseNum].color;
