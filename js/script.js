@@ -5,11 +5,19 @@ let sfx = new Audio('sounds/achievement.mp3');
 
 // when you enter this page for the first time
 if (localStorage.vosSettings == undefined) {
-  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultUsername: true}));
+  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
 }
 
 let userName = JSON.parse(localStorage.vosSettings).userName;
 let audioOn = JSON.parse(localStorage.vosSettings).audio;
+
+if (!(localStorage.vosSettings == undefined)) {
+  userName = JSON.parse(localStorage.vosSettings).userName;
+  audioOn = JSON.parse(localStorage.vosSettings).audio;
+} else {
+  userName = 'Player';
+  audioOn = false;
+}
 
 document.getElementById('userNameInput').value = JSON.parse(localStorage.vosSettings).userName;
 
@@ -248,24 +256,27 @@ function achMenu() {
   document.getElementById('achMenu').style.display = 'flex';
 }
 
-function generateSettingsFile({defaultUsername: defaultUsername}) {
+function generateSettingsFile({defaultSettings: defaultSettings}) {
 
   let settingsUserName;
+  let settingsAudioOn;
 
-  if (defaultUsername) {
+  if (defaultSettings) {
     settingsUserName = 'Player';
+    settingsAudioOn = false;
   } else {
     settingsUserName = document.getElementById('userNameInput').value;
+    settingsAudioOn = audioOn
   }
 
   return {
     userName: settingsUserName,
-    audio: audioOn,
+    audio: settingsAudioOn,
   }
 }
 
 function saveSettings() {
-  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultUsername: false}));
+  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: false}));
 }
 
 function loadMod(zip) {
