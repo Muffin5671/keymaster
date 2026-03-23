@@ -160,7 +160,7 @@ async function readResponses() {
 function getAchievementData() {
   fetch('data/achievementList.json')
   .then(res => res.json()).then(data => {
-    let achMenu = document.getElementById('achMenu');
+    let achMenuElement = document.getElementById('achMenu');
     data.forEach((object) => {
       achievementDiv = document.createElement('div');
       achievementDiv.id = object.id;
@@ -170,13 +170,18 @@ function getAchievementData() {
       achLabel.innerText = object.name;
       achievementDiv.append(iconImg);
       achievementDiv.append(achLabel);
-      achMenu.append(achievementDiv);
+      achMenuElement.append(achievementDiv);
     })
   })
 }
 
+function loadFetch() {
+  readResponses();
+  getAchievementData();
+}
+
 // fetches keymaster responses when page loads
-onload = readResponses;
+onload = loadFetch;
 
 // keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
