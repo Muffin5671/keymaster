@@ -1,12 +1,22 @@
 // setup script
 
-let music = new Audio('sounds/secretLoop.mp3');
-let sfx = new Audio('sounds/achievement.mp3');
+let manifest;
 
-// when you enter this page for the first time
-if (localStorage.vosSettings == undefined) {
-  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
+async function getManifest() {
+  manifest = await fetch('data/manifest.json').then(res => res.json()).catch((err) => console.info('Error fetching manifest.json'));
 }
+
+getManifest();
+
+let music = new Audio(manifest.sounds.music);
+let sfx = new Audio(manifest.sounds.achievement);
+
+const font = new FontFace(manifest.fonts[0].name, `url(${manifest.fonts[0].path})`);
+
+font.load().then((loadedFont) => {
+  document.fonts.add(loadedFont);
+  document.body.style.fontFamily = manifest.fonts[0].name;
+})
 
 let userName = JSON.parse(localStorage.vosSettings).userName;
 let audioOn = JSON.parse(localStorage.vosSettings).audio;
@@ -15,8 +25,13 @@ if (!(localStorage.vosSettings == undefined)) {
   userName = JSON.parse(localStorage.vosSettings).userName;
   audioOn = JSON.parse(localStorage.vosSettings).audio;
 } else {
-  userName = 'Player';
+  userName = manifest.defaultUsername;
   audioOn = false;
+}
+
+// when you enter this page for the first time
+if (localStorage.vosSettings == undefined) {
+  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
 }
 
 document.getElementById('userNameInput').value = JSON.parse(localStorage.vosSettings).userName;
@@ -93,7 +108,7 @@ async function readResponses() {
     if (!(cached.responses == undefined)) {
       response = cached.responses;
     } else {
-      response = await fetch('data/keymasterResponses.json').then(res => res.json());
+      response = await fetch(manifest.responsesURL).then(res => res.json());
     }
     
     // responses start on a random number
@@ -112,7 +127,7 @@ async function readResponses() {
     if (!(cached.messages == undefined)) {
       response2 = cached.messages;
     } else {
-      response2 = await fetch('data/keymasterMessages.json').then(res => res.json());
+      response2 = await fetch(manifest.messagesURL).then(res => res.json());
     }
     
     // can start on array index 0 or array index 9
@@ -140,7 +155,7 @@ async function readResponses() {
     if (!(cached.basement == undefined)) {
       response3 = cached.basement;
     } else {
-      response3 = await fetch('data/keymasterBasement.json').then(res => res.json());
+      response3 = await fetch(manifest.basementURL).then(res => res.json());
     }
     
     kmBasementNum = Math.floor(Math.random() * response3.length);
@@ -159,7 +174,7 @@ async function readResponses() {
 }
 
 function getAchievementData() {
-  fetch('data/achievementList.json')
+  fetch(manifest.achievementsURL)
   .then(res => res.json()).then(data => {
     let achMenuElement = document.getElementById('achMenu');
     data.forEach((object) => {

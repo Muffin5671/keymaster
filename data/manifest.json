@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "creator": "MuffinGDYT",
+  "defaultUsername": "Player",
+  "messagesURL": "data/keymasterMessages.json",
+  "responsesURL": "data/keymasterResponses.json",
+  "basementURL": "data/keymasterBasement.json",
+  "achievementsURL": "data/achievementList.json",
+  "sounds": {
+    "music": "sounds/secretLoop.mp3",
+    "achievement": "sounds/achievement.mp3"
+  },
+  "fonts": [
+    {"name": "Main", "path": "fonts/Pusab.ttf"}
+  ]
+}
