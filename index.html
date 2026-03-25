@@ -97,7 +97,8 @@
 
         <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15">
         <input type="checkbox" id="audioCheck">
-        <button onclick="saveSettings()">Save</button>
+        <button style="height: 50px;" onclick="localStorage.removeItem('vosCached'); window.location.reload();">Clear Cache and Reload</button>
+        <button style="height: 50px;" onclick="saveSettings()">Save</button>
       </div>
       <div class="brownbox" id="achMenu" style="
         position: absolute;
