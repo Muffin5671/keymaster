@@ -56,7 +56,7 @@
       text-align: center;
       width: 350px;
       height: 70px;
-      ">
+      " autocomplete="off">
     
     <img src="images/keymaster.png" style="
       position: relative;
@@ -96,9 +96,9 @@
           " alt="Close Button" title="Close Menu" onclick="document.getElementById('optMenu').style.display = 'none'">
 
         <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15">
+        <button style="width: 40%; height: 62px; transform: translateY(-80px);" onclick="saveSettings()">Save</button>
         <input type="checkbox" id="audioCheck">
-        <button style="height: 50px;" onclick="localStorage.removeItem('vosCached'); window.location.reload();">Clear Cache and Reload</button>
-        <button style="height: 50px;" onclick="saveSettings()">Save</button>
+        <button style="width: 90%; height: 62px;" onclick="localStorage.removeItem('vosCached'); window.location.reload();">Clear Cache and Reload</button>
       </div>
       <div class="brownbox" id="achMenu" style="
         position: absolute;
