@@ -1,6 +1,5 @@
 // setup script
 import ModReader from './modules/modReader.js';
-import * as zip from './libs/zip.min.js';
 
 let music = new Audio('sounds/secretLoop.mp3');
 let sfx = new Audio('sounds/achievement.mp3');
@@ -292,7 +291,7 @@ function achievement(name, cubeID) {
   achName.innerText = name;
   element.append(achName);
   document.body.append(element);
-  setTimeout(3000, () => {document.querySelector('#achPopup').remove()});
+  setTimeout(() => {document.querySelector('#achPopup').remove()}, 3000);
   
 }
 
