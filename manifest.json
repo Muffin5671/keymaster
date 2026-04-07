@@ -1,0 +1,27 @@
+{
+  "name": "Vault of Secrets",
+  "short_name": "Vault",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "type": "image/png",
+      "sizes": "110x110"
+    }
+  ],
+  "id": "/",
+  "start_url": "/",
+  "background_color": "#00000000",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#4a0063",
+  "shortcuts": [
+    {
+      "name": "Vault of Secrets",
+      "short_name": "Vault",
+      "description": "GD vault of secrets from your browser",
+      "url": "/",
+      "icons": [{ "src": "favicon.ico", "sizes": "110x110" }]
+    }
+  ],
+  "description": "GD vault of secrets from your browser"
+}

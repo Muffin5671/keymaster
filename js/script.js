@@ -30,6 +30,8 @@ let kmMessageNum;
 let response3;
 let kmBasementNum;
 
+let response4;
+
 // will be used in options menu
 function getMetadata() {
   return {
@@ -97,7 +99,7 @@ if (!(localStorage.vosCached == undefined)) {
 // all keymaster messages are in an external JSON
 async function readResponses() {
   
-
+  // responses
   try {
 
     if (!(cached.responses == undefined)) {
@@ -116,7 +118,7 @@ async function readResponses() {
     
   }
 
-
+  // messages
   try {
     
     if (!(cached.messages == undefined)) {
@@ -144,7 +146,7 @@ async function readResponses() {
 
   }
 
-
+  // basement messages
   try {
 
     if (!(cached.basement == undefined)) {
@@ -162,8 +164,24 @@ async function readResponses() {
 
   }
 
+  // special messages
+  try {
+
+    if (!(cached.special == undefined)) {
+      response4 = cached.special;
+    } else {
+      response4 = await fetch('data/keymasterSpecial.json').then(res => res.json());
+    }
+    
+  } catch (err) {
+    
+    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    throw new Error(err);
+    
+  }
+
   if (localStorage.vosCached == undefined) {
-    localStorage.vosCached = JSON.stringify({data: gzip(btoa(JSON.stringify({messages: response2, responses: response, basement: response3})))});
+    localStorage.vosCached = JSON.stringify({data: gzip(btoa(JSON.stringify({messages: response2, responses: response, basement: response3, special: response4})))});
   }
 
 }
@@ -224,7 +242,7 @@ function runOnload() {
   console.log(getMetadata());
 }
 
-// fetches keymaster responses when page loads
+// runs multiple functions when page loads
 onload = runOnload;
 
 // keymaster's next message, who 'reads' your messages
@@ -330,11 +348,9 @@ function saveSettings() {
   settings.userName = settings.userName.replaceAll(' ', '');
 
   let uEmpty = document.querySelector('#userNameInput').value == '';
-  if (uEmpty) {
-    alert('Username cannot be empty.')
-  } else {
-    localStorage.vosSettings = JSON.stringify(settings);
-  }
+
+  if (uEmpty) alert('Username cannot be empty.');
+  else localStorage.vosSettings = JSON.stringify(settings);
 }
 
 class ModReader {
