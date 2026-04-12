@@ -1,11 +1,9 @@
 // setup script
-let music = new Audio('sounds/secretLoop.mp3');
-let sfx = new Audio('sounds/achievement.mp3');
+const music = new Audio('sounds/secretLoop.mp3');
+const sfx = new Audio('sounds/achievement.mp3');
 
 // when you enter this page for the first time
-if (localStorage.vosSettings == undefined) {
-  localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
-}
+if (localStorage.vosSettings == undefined) localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
 
 let userName = JSON.parse(localStorage.vosSettings).userName;
 let audioOn = JSON.parse(localStorage.vosSettings).audio;
@@ -43,15 +41,12 @@ function getMetadata() {
 }
 
 // mobile popup
-let isMobile;
-function mobileTest() {
-  isMobile = /iPhone|Android/.test(navigator.userAgent);
+const isMobile = /iPhone|Android/.test(navigator.userAgent);
+
+function mobilePopup() {
   if (isMobile) {
     alert('Note: It is recommended to use a larger screen like a desktop and not a small screen like a phone. You can manually change the page size to a proper one.');
     onclick = null;
-    return true;
-  } else {
-    return false;
   }
 }
 
@@ -62,7 +57,7 @@ function playAudio() {
 
 function clickActions() {
   audioCheck();
-  mobileTest();
+  mobilePopup();
 }
 
 onclick = clickActions;
@@ -190,7 +185,7 @@ function getAchievementData() {
   fetch('data/achievementList.json')
   .then(res => res.json())
   .then(data => {
-    let achMenuElement = document.getElementById('achMenu');
+    let achMenuElement = document.querySelector('#achMenu');
     data.forEach(object => {
       let achievementDiv = document.createElement('div');
       achievementDiv.id = object.id;
@@ -233,6 +228,11 @@ function getAchievementData() {
       achievementDiv.append(achLabel);
       achMenuElement.append(achievementDiv);
     })
+  }).catch(err => {
+    const errMsg = document.createElement('p');
+    errMsg.innerText = 'Something went wrong...';
+    document.querySelector('#achmenu').append(errMsg);
+    throw new Error(`Request failed: ${err}`);
   })
 }
 
