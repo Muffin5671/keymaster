@@ -231,7 +231,7 @@ function getAchievementData() {
   }).catch(err => {
     const errMsg = document.createElement('p');
     errMsg.innerText = 'Something went wrong...';
-    document.querySelector('#achmenu').append(errMsg);
+    document.querySelector('#achMenu').append(errMsg);
     throw new Error(`Request failed: ${err}`);
   })
 }
