@@ -116,4 +116,4 @@ if (!urlIsNull) {
   document.body.append(script);
 }
  
-export {ModReader, ModUtils, req, getDocument, modAlert};
+export {ModReader, ModUtils, req, Settings, getDocument, modAlert};

@@ -1,7 +1,9 @@
 // setup script
-import ModReader from './js/modules/modKit.js';
-import ModUtils from './js/modules/modKit.js';
-import req from './js/modules/modKit.js';
+import ModReader from './modules/modKit.js';
+import ModUtils from './modules/modKit.js';
+import req from './modules/modKit.js';
+import Settings from './modules/modKit.js';
+import getDocument from './modules/modKit.js';
 
 const music = new Audio('sounds/secretLoop.mp3');
 const sfx = new Audio('sounds/achievement.mp3');
