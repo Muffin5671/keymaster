@@ -1,4 +1,8 @@
 // setup script
+import ModReader from './js/modules/modKit.js';
+import ModUtils from './js/modules/modKit.js';
+import req from './js/modules/modKit.js';
+
 const music = new Audio('sounds/secretLoop.mp3');
 const sfx = new Audio('sounds/achievement.mp3');
 
@@ -31,7 +35,7 @@ let kmBasementNum;
 let response4;
 
 // will be used in options menu
-function getMetadata() {
+function getInfo() {
   return {
     version: '1.0.0',
     name: 'Vault of Secrets Simulator',
@@ -69,6 +73,8 @@ function audioCheck() {
     music.play();
   }
 }
+
+onblur = () => {music.pause()};
 
 function gzip(string) {
   const compressed = pako.gzip(string);
@@ -239,7 +245,7 @@ function getAchievementData() {
 function runOnload() {
   readResponses();
   getAchievementData();
-  console.log(getMetadata());
+  console.info(getMetadata());
 }
 
 // runs multiple functions when page loads
@@ -351,17 +357,4 @@ function saveSettings() {
 
   if (uEmpty) alert('Username cannot be empty.');
   else localStorage.vosSettings = JSON.stringify(settings);
-}
-
-class ModReader {
-  constructor(file) {
-    return {
-      name: modName,
-      author: modAuthor,
-      description: modDesc,
-      web_version: webVer,
-      mod_version: modVer,
-      mobileCompatible: mobile
-    }
-  }
 }
