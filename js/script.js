@@ -1,9 +1,4 @@
 // setup script
-import ModReader from './modules/modKit.js';
-import ModUtils from './modules/modKit.js';
-import req from './modules/modKit.js';
-import Settings from './modules/modKit.js';
-import getDocument from './modules/modKit.js';
 
 const music = new Audio('sounds/secretLoop.mp3');
 const sfx = new Audio('sounds/achievement.mp3');
@@ -369,5 +364,5 @@ function exportSettingsFile() {
 
 // event listeners
 document.querySelector('#keymaster').addEventListener('click', () => {
-  nextMessage($('#userInput').value);
+  nextMessage(document.querySelector('#userInput').value);
 })
