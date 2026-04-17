@@ -233,10 +233,10 @@ function getAchievementData() {
     })
   }).catch(err => {
     const errMsg = document.createElement('p');
-    if (userName == 'MuffinGDYT') errMsg.innerText = `Failure: ${err}`;
+    if (userName == 'MuffinGDYT') errMsg.innerText = `Request failed: ${err}`;
     else errMsg.innerText = 'Something went wrong...';
     document.querySelector('#achMenu').append(errMsg);
-    throw new Error(`Failure: ${err}`);
+    throw new Error(`Request failed: ${err}`);
   })
 }
 
@@ -279,7 +279,7 @@ function nextMessage(userInput) {
 // pressing enter submits input
 document.addEventListener('keydown', event => {
   if (event.code == 'Enter') {
-    nextMessage($('#userInput').value);
+    nextMessage(document.querySelector('#userInput').value);
   }
 })
 
@@ -298,10 +298,7 @@ function basementMessage() {
 }
 
 function achievement(name, cubeID) {
-  
-  if (JSON.parse(localStorage.vosSettings).audio) {
-    sfx.play();
-  }
+  if (JSON.parse(localStorage.vosSettings).audio) sfx.play();
   
   let element = document.createElement('div');
   element.id = 'achPopup';
@@ -312,7 +309,6 @@ function achievement(name, cubeID) {
   element.append(achName);
   document.body.append(element);
   setTimeout(() => {document.querySelector('#achPopup').remove()}, 3000);
-  
 }
 
 function optMenu() {
@@ -345,9 +341,7 @@ function saveSettings() {
   let settings = generateSettingsFile({defaultSettings: false});
 
   let uContainsSpace = / /.test(settings.userName);
-  if (uContainsSpace) {
-    alert(`Username saved as "${settings.userName.replaceAll(' ', '')}". Usernames cannot contain spaces.`);
-  }
+  if (uContainsSpace) alert(`Username saved as "${settings.userName.replaceAll(' ', '')}". Usernames cannot contain spaces.`);
 
   settings.userName = settings.userName.replaceAll(' ', '');
 
@@ -358,7 +352,7 @@ function saveSettings() {
 }
 
 function exportSettingsFile() {
-  const file = new File([JSON.stringify(generateSettingsFile())], 'kmSettings.json');
+  const file = new File([JSON.stringify(generateSettingsFile({defaultSettings: false}))], 'kmSettings.json');
   saveAs(file);
 }
 

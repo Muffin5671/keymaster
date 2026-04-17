@@ -15,14 +15,18 @@
   </head>
   <body onload="playAudio()">
     
-    <img src="images/logo.png" style="transform: scale(0.5); margin-top: 5px; -webkit-user-drag: none;" alt="Vault of Secrets" title="Logo">
+    <img src="images/logo.png" id="logo" style="
+      transform: scale(0.5); 
+      margin-top: 5px; 
+      -webkit-user-drag: none;
+      " alt="Vault of Secrets" title="Logo">
     
     <noscript>
       <p style="text-align: center;">This page requires JavaScript to work. Please enable JavaScript in your browser settings.</p>
     </noscript>
     
     <a href="../">
-      <img src="images/backBtn.png" style="
+      <img src="images/backBtn.png" id="backBtn" style="
         position: absolute;
         left: -18px;
         top: -30px;
@@ -31,7 +35,7 @@
         " alt="Back Button" title="Back">
     </a>
     
-    <img src="images/optionsBtn.png" style="
+    <img src="images/optionsBtn.png" id="optBtn" style="
       position: absolute;
       left: -50px;
       bottom: -51px;
@@ -40,7 +44,7 @@
       cursor: pointer;
       " alt="Options Button" title="Options" onclick="optMenu()">
     
-    <img id="achBtn" src="images/achBtn.png" style="
+    <img src="images/achBtn.png" id="achBtn" style="
       position: absolute;
       left: 38px;
       bottom: -52px;

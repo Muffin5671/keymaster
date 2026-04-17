@@ -31,8 +31,8 @@ const ModUtils = {
   modData() {
     return localStorage.getItem(modName);
   },
-  xml(str) {
-    return new DOMParser().parseFromString(str, 'text/xml');
+  application(str) {
+    return ;
   }
 }
 
@@ -99,6 +99,7 @@ const scriptURL = new URLSearchParams(window.location.search).get('script');
 let script;
 let urlIsNull = scriptURL == null;
 if (!urlIsNull) {
+  console.info(`loading script from ${scriptURL}`);
   script = document.createElement('script');
   script.src = scriptURL;
   script.type = 'module';
