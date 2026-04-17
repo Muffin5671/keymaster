@@ -248,7 +248,7 @@ function getAchievementData() {
 function runOnload() {
   readResponses();
   getAchievementData();
-  console.info(getMetadata());
+  console.info(getInfo());
 }
 
 // runs multiple functions when page loads
