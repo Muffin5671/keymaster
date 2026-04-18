@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="manifest" href="manifest.json">
     <script src="js/script.js" defer></script>
-    <script src="js/modKit.js" defer></script>
     <script src="js/libs/pako.min.js"></script>
     <script src="js/libs/FileSaver.min.js"></script>
   </head>
@@ -81,7 +80,7 @@
       transform: scale(0.5);
       -webkit-user-drag: none;
       cursor: pointer;
-      " alt="Basement Door" title="Basement" onclick="basementMessage()">
+      " alt="Basement Door" title="Basement">
     
     <div id="menus">
       <div class="brownbox" id="optMenu" style="
@@ -93,14 +92,14 @@
         display: none;
         transform: translate(-50%, -50%);
         ">
-        <img src="images/closeBtn.png" style="
+        <img src="images/closeBtn.png" id="optClose" style="
           position: absolute;
           left: -100px;
           top: -100px;
           transform: scale(0.46);
           -webkit-user-drag: none;
           cursor: pointer;
-          " alt="Close Button" title="Close Menu" onclick="document.getElementById('optMenu').style.display = 'none'">
+          " alt="Close Button" title="Close Menu">
 
         <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15" autocomplete="off">
         <button style="width: 40%; height: 62px; transform: translateY(-80px);" onclick="saveSettings()">Save</button>

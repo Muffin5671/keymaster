@@ -127,7 +127,7 @@ async function readResponses() {
     
     // can start on array index 0 or array index 9
 
-    if (Math.round(Math.random()) == 1) {
+    if (Math.floor(Math.random() * 5) == 1) {
       kmMessageNum = 9;
     } else {
       kmMessageNum = 0;
@@ -251,11 +251,11 @@ onload = runOnload;
 
 // keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
-
+  let kmResponse = document.getElementById('keymasterResponse');
   if (!(userInput == '')) {
 
-    document.getElementById('keymasterResponse').innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
-    document.getElementById('keymasterResponse').style.color = response[kmResponseNum].color;
+    kmResponse.innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    kmResponse.style.color = response[kmResponseNum].color;
     document.getElementById('userInput').value = '';
     if (kmResponseNum == response.length - 1) {
       kmResponseNum = 0;
@@ -275,13 +275,6 @@ function nextMessage(userInput) {
     }
   }
 }
-
-// pressing enter submits input
-document.addEventListener('keydown', event => {
-  if (event.code == 'Enter') {
-    nextMessage(document.querySelector('#userInput').value);
-  }
-})
 
 // messages when basement door clicked but locked
 function basementMessage() {
@@ -359,4 +352,19 @@ function exportSettingsFile() {
 // event listeners
 document.querySelector('#keymaster').addEventListener('click', () => {
   nextMessage(document.querySelector('#userInput').value);
+})
+
+// pressing enter submits input
+document.addEventListener('keydown', event => {
+  if (event.code == 'Enter') {
+    nextMessage(document.querySelector('#userInput').value);
+  }
+})
+
+document.querySelector('#basementDoor').addEventListener('click', () => {
+  basementMessage();
+})
+
+document.querySelector('#optClose').addEventListener('click', () => {
+  document.getElementById('optMenu').style.display = 'none';
 })
