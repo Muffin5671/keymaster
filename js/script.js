@@ -281,16 +281,13 @@ function nextMessage(userInput) {
 
 // messages when basement door clicked but locked
 function basementMessage() {
-
-  // just in case any mods make this use your username :)))
-  alert(response3[kmBasementNum].replace('<username>', JSON.parse(localStorage.vosSettings).userName));
+  alert(response3[kmBasementNum]);
   
   if (kmBasementNum == response3.length - 1) {
     kmBasementNum = 0;
   } else {
     kmBasementNum++;
   }
-
 }
 
 function achievement(name, cubeID) {
@@ -375,8 +372,16 @@ document.querySelector('#basementDoor').addEventListener('click', () => {
 })
 
 document.querySelector('#optClose').addEventListener('click', () => {
-  document.getElementById('optMenu').style.display = 'none';
+  document.querySelector('#optMenu').style.display = 'none';
 })
+
+document.querySelector('#achClose').addEventListener('click', () => {
+  document.querySelector('#achMenu').style.display = 'none';
+})
+
+document.querySelector('#saveSettings').addEventListener('click', () => {
+  saveSettings();
+});
 
 document.querySelector('#clearCache').addEventListener('click', () => {
   localStorage.removeItem('vosCached');

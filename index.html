@@ -41,7 +41,7 @@
       transform: scale(0.4);
       -webkit-user-drag: none;
       cursor: pointer;
-      " alt="Options Button" title="Options" onclick="optMenu()">
+      " alt="Options Button" title="Options">
     
     <img src="images/achBtn.png" id="achBtn" style="
       position: absolute;
@@ -102,7 +102,7 @@
           " alt="Close Button" title="Close Menu">
 
         <input id="userNameInput" style="height: 60px;" placeholder="Username" maxlength="15" autocomplete="off">
-        <button style="width: 40%; height: 62px; transform: translateY(-80px);" onclick="saveSettings()">Save</button>
+        <button id="saveSettings" style="width: 40%; height: 62px; transform: translateY(-80px);">Save</button>
         <input type="checkbox" id="audioCheck">
         <button id="clearCache" style="width: 560px; height: 62px;">Clear Cache and Reload</button>
         <button id="exportSettings" style="width: 560px; height: 62px;">Export Settings</button>
@@ -118,14 +118,14 @@
         transform: translate(-50%, -50%);
         text-align: center;
         ">
-        <img src="images/closeBtn.png" style="
+        <img src="images/closeBtn.png" id="achClose" style="
           position: absolute;
           left: -100px;
           top: -100px;
           transform: scale(0.46);
           -webkit-user-drag: none;
           cursor: pointer;
-          " alt="Close Button" title="Close Menu" onclick="document.getElementById('achMenu').style.display = 'none'">
+          " alt="Close Button" title="Close Menu">
     </div>
   </body>
 </html>
