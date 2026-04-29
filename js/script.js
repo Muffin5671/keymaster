@@ -1,23 +1,25 @@
 // setup script
 
+const ls = localStorage;
+
 const music = new Audio('sounds/secretLoop.mp3');
 const sfx = new Audio('sounds/achievement.mp3');
 
 // when you enter this page for the first time
-if (localStorage.vosSettings == undefined) localStorage.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
+if (ls.vosSettings == undefined) ls.vosSettings = JSON.stringify(generateSettingsFile({defaultSettings: true}));
 
-let userName = JSON.parse(localStorage.vosSettings).userName;
-let audioOn = JSON.parse(localStorage.vosSettings).audio;
+let userName = JSON.parse(ls.vosSettings).userName;
+let audioOn = JSON.parse(ls.vosSettings).audio;
 
-if (!(localStorage.vosSettings == undefined)) {
-  userName = JSON.parse(localStorage.vosSettings).userName;
-  audioOn = JSON.parse(localStorage.vosSettings).audio;
+if (!(ls.vosSettings == undefined)) {
+  userName = JSON.parse(ls.vosSettings).userName;
+  audioOn = JSON.parse(ls.vosSettings).audio;
 } else {
   userName = 'Player';
   audioOn = false;
 }
 
-$('#userNameInput')[0].value = JSON.parse(localStorage.vosSettings).userName;
+$('#userNameInput')[0].value = JSON.parse(ls.vosSettings).userName;
 $('#audioCheck')[0].checked = audioOn;
  
 let response;
@@ -88,8 +90,8 @@ function ungzip(string) {
 }
 
 let cached = {};
-if (!(localStorage.vosCached == undefined)) {
-  cached = JSON.parse(atob(ungzip(JSON.parse(localStorage.vosCached).data)));
+if (!(ls.vosCached == undefined)) {
+  cached = JSON.parse(atob(ungzip(JSON.parse(ls.vosCached).data)));
 }
 
 // all keymaster messages are in an external JSON
@@ -131,7 +133,7 @@ async function readResponses() {
       kmMessageNum = 0;
     }
 
-    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(ls.vosSettings).userName);
 
     kmMessageNum++;
     
@@ -176,8 +178,8 @@ async function readResponses() {
     
   }
 
-  if (localStorage.vosCached == undefined) {
-    localStorage.vosCached = JSON.stringify({data: gzip(btoa(JSON.stringify({messages: response2, responses: response, basement: response3, special: response4})))});
+  if (ls.vosCached == undefined) {
+    ls.vosCached = JSON.stringify({data: gzip(btoa(JSON.stringify({messages: response2, responses: response, basement: response3, special: response4})))});
   }
 
 }
@@ -254,7 +256,7 @@ function nextMessage(userInput) {
   const inputEmpty = userInput == '';
   if (!inputEmpty) {
 
-    kmResponse.innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    kmResponse.innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(ls.vosSettings).userName);
     kmResponse.style.color = response[kmResponseNum].color;
     $('#userInput')[0].value = '';
     if (kmResponseNum == response.length - 1) {
@@ -265,7 +267,7 @@ function nextMessage(userInput) {
 
   } else {
 
-    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(ls.vosSettings).userName);
     $('#keymasterResponse')[0].style.color = response2[kmMessageNum].color;
     $('#userInput')[0].value = '';
     if (kmMessageNum == response2.length - 1) {
@@ -288,7 +290,7 @@ function basementMessage() {
 }
 
 function achievement(name, cubeID) {
-  if (JSON.parse(localStorage.vosSettings).audio) sfx.play();
+  if (JSON.parse(ls.vosSettings).audio) sfx.play();
   
   let element = document.createElement('div');
   element.id = 'achPopup';
@@ -317,8 +319,8 @@ function generateSettingsFile({defaultSettings: defaultSettings}) {
     settingsUserName = 'Player';
     settingsAudioOn = false;
   } else {
-    settingsUserName = $('#userNameInput').value.replaceAll(' ', '');
-    settingsAudioOn = $('#audioCheck').checked;
+    settingsUserName = $('#userNameInput')[0].value.replaceAll(' ', '');
+    settingsAudioOn = $('#audioCheck')[0].checked;
   }
 
   return {
@@ -330,15 +332,16 @@ function generateSettingsFile({defaultSettings: defaultSettings}) {
 function saveSettings() {
   let settings = generateSettingsFile({defaultSettings: false});
 
-  let uContainsSpace = / /.test(settings.userName);
-  if (uContainsSpace) alert(`Username saved as "${settings.userName.replaceAll(' ', '')}". Usernames cannot contain spaces.`);
+  const uContainsSpace = / /.test(settings.userName);
+  const replaced = settings.userName.replaceAll(' ', '');
+  if (uContainsSpace) alert(`Username saved as "${replaced}". Usernames cannot contain spaces.`);
 
   settings.userName = settings.userName.replaceAll(' ', '');
 
   let uEmpty = $('#userNameInput')[0].value == '';
 
   if (uEmpty) alert('Username cannot be empty.');
-  else localStorage.vosSettings = JSON.stringify(settings);
+  else ls.vosSettings = JSON.stringify(settings);
 }
 
 function exportSettingsFile() {
@@ -348,7 +351,7 @@ function exportSettingsFile() {
 
 async function importSettingsFile() {
   const file = $('#settingsFile')[0].files[0];
-  localStorage.vosSettings = await file.text();
+  ls.vosSettings = await file.text();
   window.location.reload();
 }
 
@@ -389,7 +392,7 @@ $('#saveSettings')[0].addEventListener('click', () => {
 });
 
 $('#clearCache')[0].addEventListener('click', () => {
-  localStorage.removeItem('vosCached');
+  ls.removeItem('vosCached');
   window.location.reload();
 });
 
