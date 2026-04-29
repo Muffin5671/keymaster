@@ -17,8 +17,8 @@ if (!(localStorage.vosSettings == undefined)) {
   audioOn = false;
 }
 
-document.querySelector('#userNameInput').value = JSON.parse(localStorage.vosSettings).userName;
-document.querySelector('#audioCheck').checked = audioOn;
+$('#userNameInput')[0].value = JSON.parse(localStorage.vosSettings).userName;
+$('#audioCheck')[0].checked = audioOn;
  
 let response;
 let kmResponseNum;
@@ -53,7 +53,7 @@ function mobilePopup() {
 
 // plays audio on page click
 function playAudio() {
-  document.body.addEventListener('click', audioCheck);
+  $('body')[0].addEventListener('click', audioCheck);
 }
 
 onclick = () => {
@@ -109,7 +109,7 @@ async function readResponses() {
     
   } catch (err) {
     
-    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    $('#keymasterResponse')[0].innerHTML = 'Something went wrong...';
     throw new Error(err);
     
   }
@@ -131,13 +131,13 @@ async function readResponses() {
       kmMessageNum = 0;
     }
 
-    document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
 
     kmMessageNum++;
     
   } catch (err) {
     
-    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    $('#keymasterResponse')[0].innerHTML = 'Something went wrong...';
     throw new Error(err);
 
   }
@@ -155,7 +155,7 @@ async function readResponses() {
     
   } catch (err) {
     
-    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    $('#keymasterResponse')[0].innerHTML = 'Something went wrong...';
     throw new Error(err);
 
   }
@@ -171,7 +171,7 @@ async function readResponses() {
     
   } catch (err) {
 
-    document.getElementById('keymasterResponse').innerHTML = 'Something went wrong...';
+    $('#keymasterResponse')[0].innerHTML = 'Something went wrong...';
     throw new Error(err);
     
   }
@@ -186,7 +186,7 @@ function getAchievementData() {
   fetch('data/achievementList.json')
   .then(res => res.json())
   .then(data => {
-    let achMenuElement = document.querySelector('#achMenu');
+    let achMenuElement = $('#achMenu')[0];
     data.forEach(object => {
       let achievementDiv = document.createElement('div');
       achievementDiv.id = object.id;
@@ -236,7 +236,7 @@ function getAchievementData() {
     const errMsg = document.createElement('p');
     if (userName == 'MuffinGDYT') errMsg.innerText = `Request failed: ${err}`;
     else errMsg.innerText = 'Something went wrong...';
-    document.querySelector('#achMenu').append(errMsg);
+    $('#achMenu')[0].append(errMsg);
     throw new Error(`Request failed: ${err}`);
   })
 }
@@ -250,13 +250,13 @@ onload = () => {
 
 // keymaster's next message, who 'reads' your messages
 function nextMessage(userInput) {
-  let kmResponse = document.getElementById('keymasterResponse');
+  let kmResponse = $('#keymasterResponse')[0];
   const inputEmpty = userInput == '';
   if (!inputEmpty) {
 
     kmResponse.innerText = response[kmResponseNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
     kmResponse.style.color = response[kmResponseNum].color;
-    document.getElementById('userInput').value = '';
+    $('#userInput')[0].value = '';
     if (kmResponseNum == response.length - 1) {
       kmResponseNum = 0;
     } else {
@@ -265,9 +265,9 @@ function nextMessage(userInput) {
 
   } else {
 
-    document.getElementById('keymasterResponse').innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
-    document.getElementById('keymasterResponse').style.color = response2[kmMessageNum].color;
-    document.getElementById('userInput').value = '';
+    $('#keymasterResponse')[0].innerText = response2[kmMessageNum].message.replace('<username>', JSON.parse(localStorage.vosSettings).userName);
+    $('#keymasterResponse')[0].style.color = response2[kmMessageNum].color;
+    $('#userInput')[0].value = '';
     if (kmMessageNum == response2.length - 1) {
       kmMessageNum = 0;
     } else {
@@ -298,15 +298,15 @@ function achievement(name, cubeID) {
   achName.innerText = name;
   element.append(achName);
   document.body.append(element);
-  setTimeout(() => {document.querySelector('#achPopup').remove()}, 3000);
+  setTimeout(() => {$('#achPopup')[0].remove()}, 3000);
 }
 
 function optMenu() {
-  document.getElementById('optMenu').style.display = '';
+  $('#optMenu')[0].style.display = '';
 }
 
 function achMenu() {
-  document.getElementById('achMenu').style.display = 'flex';
+  $('#achMenu')[0].style.display = 'flex';
 }
 
 function generateSettingsFile({defaultSettings: defaultSettings}) {
@@ -317,8 +317,8 @@ function generateSettingsFile({defaultSettings: defaultSettings}) {
     settingsUserName = 'Player';
     settingsAudioOn = false;
   } else {
-    settingsUserName = document.querySelector('#userNameInput').value.replaceAll(' ', '');
-    settingsAudioOn = document.querySelector('#audioCheck').checked;
+    settingsUserName = $('#userNameInput').value.replaceAll(' ', '');
+    settingsAudioOn = $('#audioCheck').checked;
   }
 
   return {
@@ -335,7 +335,7 @@ function saveSettings() {
 
   settings.userName = settings.userName.replaceAll(' ', '');
 
-  let uEmpty = document.querySelector('#userNameInput').value == '';
+  let uEmpty = $('#userNameInput')[0].value == '';
 
   if (uEmpty) alert('Username cannot be empty.');
   else localStorage.vosSettings = JSON.stringify(settings);
@@ -347,24 +347,24 @@ function exportSettingsFile() {
 }
 
 async function importSettingsFile() {
-  const file = document.querySelector('#settingsFile').files[0];
+  const file = $('#settingsFile')[0].files[0];
   localStorage.vosSettings = await file.text();
   window.location.reload();
 }
 
 // event listeners
-document.querySelector('#keymaster').addEventListener('click', () => {
-  nextMessage(document.querySelector('#userInput').value);
+$('#keymaster')[0].addEventListener('click', () => {
+  nextMessage($('#userInput')[0].value);
 })
 
 // pressing enter submits input
 document.addEventListener('keydown', event => {
   if (event.code == 'Enter') {
-    nextMessage(document.querySelector('#userInput').value);
+    nextMessage($('#userInput')[0].value);
   }
 })
 
-document.querySelector('#basementDoor').addEventListener('click', () => {
+$('#basementDoor')[0].addEventListener('click', () => {
   basementMessage();
 })
 
@@ -372,23 +372,23 @@ $('#optBtn')[0].addEventListener('click', () => {
   optMenu();
 })
 
-document.querySelector('#optClose').addEventListener('click', () => {
-  document.querySelector('#optMenu').style.display = 'none';
+$('#optClose')[0].addEventListener('click', () => {
+  $('#optMenu').style.display = 'none';
 })
 
-document.querySelector('#achClose').addEventListener('click', () => {
-  document.querySelector('#achMenu').style.display = 'none';
+$('#achClose')[0].addEventListener('click', () => {
+  $('#achMenu')[0].style.display = 'none';
 })
 
-document.querySelector('#saveSettings').addEventListener('click', () => {
+$('#saveSettings')[0].addEventListener('click', () => {
   saveSettings();
 });
 
-document.querySelector('#clearCache').addEventListener('click', () => {
+$('#clearCache')[0].addEventListener('click', () => {
   localStorage.removeItem('vosCached');
   window.location.reload();
 });
 
-document.querySelector('#exportSettings').addEventListener('click', () => {
+$('#exportSettings')[0].addEventListener('click', () => {
   exportSettingsFile();
 });
