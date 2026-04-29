@@ -372,8 +372,12 @@ $('#optBtn')[0].addEventListener('click', () => {
   optMenu();
 })
 
+$('#achBtn')[0].addEventListener('click', () => {
+  achMenu();
+})
+
 $('#optClose')[0].addEventListener('click', () => {
-  $('#optMenu').style.display = 'none';
+  $('#optMenu')[0].style.display = 'none';
 })
 
 $('#achClose')[0].addEventListener('click', () => {
